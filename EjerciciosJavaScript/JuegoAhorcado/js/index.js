@@ -22,7 +22,7 @@ function obtenerPalabra() {
 
     
     for(let i=0;i<palabraSecreta.length;i++){
-        MostrarPalabra.push("_ ");
+        MostrarPalabra.push(" _ ");
     }
     console.log(MostrarPalabra.join(""));
    
