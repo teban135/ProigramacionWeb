@@ -53,7 +53,7 @@ function reiniciar() {
     document.getElementById("jugar").disabled = false;
     document.getElementById("reiniciar").disabled = true;
     document.getElementById("palabra").textContent = " ";
-    MostrarPalabra = [], letrasUsadas = [];
+    MostrarPalabra = [], letrasUsadas = [],intentosRestantes=6;
     jugar();
 }
 
@@ -65,8 +65,17 @@ function validarLetra() {
     } else {
         letrasUsadas.push(letra);
         document.getElementById("letrasUsadas").innerText = letrasUsadas.toString();
-        
-        if(palabraSecreta.includes(letra)){
+
+        if(intentosRestantes == 0){
+            alert("Has perdido, la palabra era: " + palabraSecreta);
+            document.getElementById("intentosRestantes").textContent = intentosRestantes;
+            document.getElementById("validar").disabled = false;
+            document.getElementById("reiniciar").disabled = true;
+            document.getElementById("jugar").disabled = false;
+            reiniciar();
+            
+        }
+        else if(palabraSecreta.includes(letra)){
 
             for(let i=0;i<palabraSecreta.length;i++){
                 if(palabraSecreta[i] == letra){
@@ -78,6 +87,7 @@ function validarLetra() {
             console.log(MostrarPalabra.join(""));
             console.log(palabraSecreta);
 
+            
             if(MostrarPalabra.join("") === palabraSecreta){
                 alert("Felicidades, has adivinado la palabra");
             }
