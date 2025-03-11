@@ -8,9 +8,14 @@
 
 let listaTareas = [];
 
+
+
 //Función para agregar una tarea a la lista
 function agregarTarea() {
-    let tarea =document.getElementById("inputTarea").value;
+    let tarea ={
+        nombre: document.getElementById("inputTarea").value,
+        completada: false
+    }
     listaTareas.push(tarea);
     document.getElementById("inputTarea").value="";
     console.log(listaTareas);
@@ -20,12 +25,32 @@ function agregarTarea() {
 //Función para mostrar la lista de tareas
 function mostrarTareas() {
     let lista=document.getElementById("listaTareas");
-    lista.innerHtml="";
-    let item=document.createElement("li");
+    lista.innerHTML ="";
+   
     for(let i=0;i<listaTareas.length;i++){
-    item.innerText=listaTareas[i];
-    lista.appendChild(item);
+        let item=document.createElement("li");
+        
+        if(listaTareas[i].completada){
+            item.classList.add("completada");
+        }else{
+            item.classList.add("noCompletada");
+        }
+
+        item.addEventListener("click",function(){
+            listaTareas[i].completada=!listaTareas[i].completada;
+            if(listaTareas[i].completada){
+                item.classList.remove("noCompletada");
+                item.classList.add("completada");
+            }else{
+                item.classList.remove("completada");
+                item.classList.add("noCompletada");
+                
+            }
+        })
+        item.textContent=listaTareas[i].nombre;
+        lista.appendChild(item);
     }
+
 
 }
 
